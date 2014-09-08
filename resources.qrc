@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>resources/img/logo_with_homebrew.png</file>
+    </qresource>
+</RCC>
