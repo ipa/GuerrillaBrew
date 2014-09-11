@@ -21,3 +21,12 @@ FORMS    += mainwindow.ui
 
 RESOURCES += \
     resources.qrc
+
+OTHER_FILES += \
+    LICENSE \
+    README.md
+
+INCLUDEPATH += /usr/local/Cellar/boost/1.55.0_2/include
+
+LIBS += -L/usr/local/Cellar/boost/1.55.0_2/lib -lboost_date_time
+
