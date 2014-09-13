@@ -29,3 +29,10 @@ void MainWindow::on_startBrew_clicked()
 {
     QMessageBox::information(NULL, "Start", "I'll start the brew, go and have a beer in the meanwhile!");
 }
+
+void MainWindow::on_openBrew_clicked()
+{
+    brewWindow = new BrewWindow();
+    brewWindow->show();
+    brewWindow->move(0,0);
+}

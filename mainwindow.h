@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
+#include "brewwindow.h"
 namespace Ui {
 class MainWindow;
 }
@@ -21,8 +21,11 @@ private slots:
 
     void on_startBrew_clicked();
 
+    void on_openBrew_clicked();
+
 private:
     Ui::MainWindow *ui;
+    BrewWindow *brewWindow;
 };
 
 #endif // MAINWINDOW_H
