@@ -10,6 +10,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     MainWindow w;
     w.show();
+    w.showFullScreen();
     w.move(0, 0);
 
     // The following date is in ISO 8601 extended format (CCYY-MM-DD)
