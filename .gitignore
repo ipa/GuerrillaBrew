@@ -31,5 +31,5 @@ Makefile*
 *.qmlproject.user
 *.qmlproject.user.*
 
-#cmake
-bin/*
+#binaries
+src/brewcontrol/bin/*
