@@ -33,3 +33,6 @@ Makefile*
 
 #binaries
 src/brewcontrol/bin/*
+
+# eagle
+*#1
