@@ -1,0 +1,17 @@
+Partlist
+
+Exported from fermentcontrol.sch at 12.11.14 11:24
+
+EAGLE Version 7.1.0 Copyright (c) 1988-2014 CadSoft
+
+Assembly variant: 
+
+Part     Value          Device           Package      Library             Sheet
+
+JP1                     M03X2SHROUD      2X3-SHROUDED SparkFun-Connectors 1
+R1       47k            RESISTORPTH-1/4W AXIAL-0.4    SparkFun-Resistors  1
+R2       47k            RESISTORPTH-1/4W AXIAL-0.4    SparkFun-Resistors  1
+R3       4.7k           RESISTORPTH-1/4W AXIAL-0.4    SparkFun-Resistors  1
+TEMP                    M03POLAR         MOLEX-1X3    SparkFun-Connectors 1
+U1       ALC_SENSOR     GAS_SENSOR       MQ-3         SparkFun-Sensors    1
+U2       CO2_SENSOR     GAS_SENSOR       MQ-3         SparkFun-Sensors    1
