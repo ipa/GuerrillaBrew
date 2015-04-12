@@ -7,7 +7,7 @@ set (Brewcontrol_VERSION_MINOR 1)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-set(SOURCE_FILES main.cpp)
+set(SOURCE_FILES main.cpp PID.hpp PID.cpp)
 add_executable(brewcontrol ${SOURCE_FILES})
 
 set(Boost_USE_STATIC_LIBS        ON) # only find static libs
