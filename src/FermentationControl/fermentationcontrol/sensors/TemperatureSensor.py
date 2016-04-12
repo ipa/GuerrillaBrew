@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from datetime import datetime
 from util.Observer import Observable
 from PyQt5.QtCore import QTimer
 
@@ -30,6 +31,6 @@ class TemperatureSensor:
 
         def notify(self):
             self.setChanged()
-            self.notifyObservers(self.outer.temperature)
+            self.notifyObservers([datetime.now(), self.outer.temperature])
 
 

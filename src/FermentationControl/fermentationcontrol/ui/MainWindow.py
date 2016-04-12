@@ -32,7 +32,8 @@ class MainWindow(QMainWindow):
             self.outer = outer
 
         def update(self, observable, arg):
-            self.outer.updatelcd(arg)
+            __, val = arg
+            self.outer.updatelcd(val)
             # print(self.outer)
 
 

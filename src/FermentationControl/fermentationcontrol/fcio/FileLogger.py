@@ -2,14 +2,18 @@
 
 import csv
 from util.Observer import Observer
+import os.path
 from datetime import datetime
 
 class FileLogger:
 
     def __init__(self, filename):
         self.temperatureObserver = FileLogger.TemperatureObserver(self)
-        self.currentSensorData = {'Temperature': 0, 'Humidity': 0}
+        self.currentSensorData = {'Time': datetime.now(), 'Temperature': 0, 'Humidity': 0}
         self.filename = filename
+        with open(self.filename, 'w') as csvfile:
+            csvwriter = csv.writer(csvfile)
+            csvwriter.writerow(self.currentSensorData.keys())
 
     def writeToFile(self):
         with open(self.filename, 'a') as csvfile:
@@ -21,7 +25,8 @@ class FileLogger:
             self.outer = outer
 
         def update(self, observable, arg):
-            # TODO: write to file
-            self.outer.currentSensorData['Temperature'] = arg
+            now, temperature = arg
+            self.outer.currentSensorData['Time'] = now
+            self.outer.currentSensorData['Temperature'] = temperature
             self.outer.writeToFile()
             pass
