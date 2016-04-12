@@ -3,23 +3,36 @@
 import sys
 from PyQt5 import uic
 from PyQt5.QtWidgets import QMainWindow
+from util.Observer import Observer
+
 
 class MainWindow(QMainWindow):
-    lcdvalue = 20.0
 
     def __init__(self):
         super(MainWindow, self).__init__()
         uic.loadUi('ui/mainwindow.ui', self)
         self.show()
-        self.closeButton.clicked.connect(self.onClose)
-        self.updatelcd()
+        # self.showFullScreen()
+        self.updatelcd(22.3)
+        self.initSignals()
+        self.temperatureObserver = MainWindow.TemperatureObserver(self)
 
-    def updatelcd(self):
-        self.lcdvalue += 0.1
-        self.lcdNumber.display(self.lcdvalue)
-        #sc.enter(2, 1, self.updatelcd, (sc,))
-        print("foo")
+    def initSignals(self):
+        self.closeButton.clicked.connect(self.onClose)
+
+    def updatelcd(self, lcdvalue):
+        self.lcdNumber.display(lcdvalue)
 
     def onClose(self):
         self.close()
         sys.exit(0)
+
+    class TemperatureObserver(Observer):
+        def __init__(self, outer):
+            self.outer = outer
+
+        def update(self, observable, arg):
+            self.outer.updatelcd(arg)
+            # print(self.outer)
+
+
