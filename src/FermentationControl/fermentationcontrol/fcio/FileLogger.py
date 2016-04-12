@@ -2,8 +2,8 @@
 
 import csv
 from util.Observer import Observer
-import os.path
 from datetime import datetime
+
 
 class FileLogger:
 

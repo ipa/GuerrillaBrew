@@ -6,6 +6,11 @@ from PyQt5.QtWidgets import QMainWindow
 from util.Observer import Observer
 
 
+class MainWindowControl:
+    def __init__(self):
+        pass
+
+
 class MainWindow(QMainWindow):
 
     def __init__(self):
@@ -13,7 +18,6 @@ class MainWindow(QMainWindow):
         uic.loadUi('ui/mainwindow.ui', self)
         self.show()
         # self.showFullScreen()
-        self.updatelcd(22.3)
         self.initSignals()
         self.temperatureObserver = MainWindow.TemperatureObserver(self)
 

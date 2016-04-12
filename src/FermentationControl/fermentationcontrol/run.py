@@ -18,4 +18,3 @@ if __name__ == '__main__':
     tsensor.update()
 
     sys.exit(app.exec_())
-
