@@ -18,3 +18,6 @@ class Config(Borg):
 
     def get_sensor_interval(self):
         return ast.literal_eval(self.config[self.use_config]['SensorInterval'])
+
+    def get_display_sensor(self):
+        return self.config[self.use_config]['DisplaySensor']

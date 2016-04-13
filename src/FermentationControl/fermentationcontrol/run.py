@@ -5,6 +5,7 @@ from PyQt5.QtWidgets import QApplication
 from ui.MainWindow import MainWindow
 from sensors.TemperatureSensor import  TemperatureSensor
 from fcio.FileLogger import FileLogger
+from fcio.ConsoleLogger import ConsoleLogger
 from util.Config import Config
 
 if __name__ == '__main__':
@@ -15,10 +16,11 @@ if __name__ == '__main__':
     sensors = TemperatureSensor.create_sensors_from_list(sensors_config)
 
     file_logger = FileLogger('output.log')
-
+    console_logger = ConsoleLogger()
     # Start Updates
     for sensor in sensors:
         sensor.tempChangedNotifier.addObserver(file_logger.temperatureObserver)
+        sensor.tempChangedNotifier.addObserver(console_logger.temperatureObserver)
         sensor.update()
 
     # Start GUI

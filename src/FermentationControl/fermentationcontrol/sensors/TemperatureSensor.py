@@ -67,7 +67,7 @@ class TemperatureSensor:
 
         def notify(self):
             self.setChanged()
-            self.notifyObservers([datetime.now(), self.outer.temperature])
+            self.notifyObservers([self.outer.name, datetime.now(), self.outer.temperature])
 
 
 class Sensor:

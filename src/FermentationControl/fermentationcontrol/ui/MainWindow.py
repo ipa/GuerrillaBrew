@@ -5,8 +5,7 @@ from datetime import datetime
 from PyQt5 import uic
 from PyQt5.QtWidgets import QMainWindow
 from util.Observer import Observer
-
-from string import Formatter
+from util.Config import Config
 
 class MainWindowControl:
     def __init__(self):
@@ -40,8 +39,10 @@ class MainWindow(QMainWindow):
             self.outer = outer
 
         def update(self, observable, arg):
-            __, val = arg
-            self.outer.updatelcd(val)
+            # print(arg)
+            name, __, val = arg
+            if Config().get_display_sensor() == name:
+                self.outer.updatelcd(val)
             # print(self.outer)
 
 
