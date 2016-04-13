@@ -9,18 +9,25 @@ from util.Config import Config
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    window = MainWindow()
-
-    filelogger = FileLogger('output.log')
+    with_gui = sys.argv.count('--no-gui') == 0
 
     sensors_config = Config().get_sensors()
     sensors = TemperatureSensor.create_sensors_from_list(sensors_config)
 
+    file_logger = FileLogger('output.log')
+
     # Start Updates
     for sensor in sensors:
-        sensor.tempChangedNotifier.addObserver(window.temperatureObserver)
-        sensor.tempChangedNotifier.addObserver(filelogger.temperatureObserver)
+        sensor.tempChangedNotifier.addObserver(file_logger.temperatureObserver)
         sensor.update()
 
+    # Start GUI
+    if with_gui:
+        print('starting gui...')
+        window = MainWindow()
+        for sensor in sensors:
+            sensor.tempChangedNotifier.addObserver(window.temperatureObserver)
 
     sys.exit(app.exec_())
+
+

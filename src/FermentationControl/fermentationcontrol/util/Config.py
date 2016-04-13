@@ -10,7 +10,7 @@ class Config(Borg):
         Borg.__init__(self)
         self.config = configparser.ConfigParser()
         self.config.read('config.ini')
-        self.use_config = 'DEVELOP' # TODO self.config.get('UseConfig')
+        self.use_config = self.config['DEFAULT']['UseConfig']
 
     def get_sensors(self):
         sensors = ast.literal_eval(self.config[self.use_config]['Sensors'])
