@@ -17,17 +17,19 @@ class Timers(Borg):
     def __init__(self):
         Borg.__init__(self)
 
-    def start(self):
-        self.update()
-
-    def update(self):
-        QTimer().singleShot(2000, Timers().update)
+    def update_not_working(self):
+        QTimer().singleShot(2000, Timers().update_not_working)
         print('update')
 
+
+def update_working():
+    QTimer().singleShot(2000, update_working)
+    print('update working')
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     print('start timer')
-    Timers().start()
+    Timers().update_not_working()
+    update_working()
 
     sys.exit(app.exec_())
