@@ -7,6 +7,7 @@ import random
 
 from datetime import datetime
 from util.Observer import Observable
+from util.Config import Config
 from PyQt5.QtCore import QTimer
 
 
@@ -52,7 +53,7 @@ class TemperatureSensor:
         self.tempChangedNotifier.notify()
 
     def update(self):
-        QTimer().singleShot(2000, self.update)
+        QTimer().singleShot(Config().get_sensor_interval(), self.update)
         self.changeValue(self.readFromSensor())
 
     def readFromSensor(self):
