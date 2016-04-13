@@ -20,6 +20,12 @@
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <widget class="QLabel" name="label">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>50</height>
+       </size>
+      </property>
       <property name="font">
        <font>
         <pointsize>14</pointsize>
@@ -28,6 +34,22 @@
       <property name="text">
        <string>The Beer Guerrillas
 Fermentation Controller</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="labelLast">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>14</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Last Update: </string>
       </property>
      </widget>
     </item>

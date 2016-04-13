@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 
 import sys
+from datetime import datetime
 from PyQt5 import uic
 from PyQt5.QtWidgets import QMainWindow
 from util.Observer import Observer
 
+from string import Formatter
 
 class MainWindowControl:
     def __init__(self):
@@ -25,7 +27,9 @@ class MainWindow(QMainWindow):
         self.closeButton.clicked.connect(self.onClose)
 
     def updatelcd(self, lcdvalue):
-        self.lcdNumber.display(lcdvalue)
+        disp = '{0:.2f}'.format(lcdvalue)
+        self.lcdNumber.display(disp)
+        self.labelLast.setText('Last Update: ' + datetime.now().strftime('%x %X'))
 
     def onClose(self):
         self.close()

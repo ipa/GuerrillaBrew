@@ -9,7 +9,7 @@ class FileLogger:
 
     def __init__(self, filename):
         self.temperatureObserver = FileLogger.TemperatureObserver(self)
-        self.currentSensorData = {'Time': datetime.now(), 'Temperature': 0, 'Humidity': 0}
+        self.currentSensorData = {'Time': datetime.now(), 'Temperature': 0}
         self.filename = filename
         with open(self.filename, 'w') as csvfile:
             csvwriter = csv.writer(csvfile)
