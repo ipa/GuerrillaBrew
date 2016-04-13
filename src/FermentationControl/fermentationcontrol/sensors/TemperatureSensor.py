@@ -12,11 +12,40 @@ from PyQt5.QtCore import QTimer
 
 class TemperatureSensor:
 
-    def __init__(self, port):
+    def __init__(self, port, name, sensor):
         self.tempChangedNotifier = TemperatureSensor.TemperatureChangedNotifier(self)
-        self.temperature = 20.0
+        self.temperature = 0.0
+        self.port = None
+        self.name = None
         self.port = port
-        self.sensor = DummySensor()
+        self.name = name
+        self.sensor = sensor
+
+    @staticmethod
+    def create_sensor(sensor_config):
+        sensor_name, sensor_type, sensor_port = sensor_config
+
+        switcher = {
+            'DS18B20': DS18B20([sensor_port]),
+            'DummySensor': DummySensor(sensor_config),
+        }
+        sensor = switcher.get(sensor_type, None)
+        sensor.connect()
+        ts = TemperatureSensor(sensor_port, sensor_name, sensor)
+
+        return ts
+
+    @staticmethod
+    def create_sensors_from_list(sensor_config):
+        sensors = []
+        for sensor_name in sensor_config:
+            sc = sensor_config[sensor_name]
+            sensor_type = sc[1]
+            sensor_port = sc[0]
+            ts = TemperatureSensor.create_sensor([sensor_name, sensor_type, sensor_port])
+            sensors.append(ts)
+
+        return sensors
 
     def changeValue(self, t):
         self.temperature = t
@@ -41,7 +70,11 @@ class TemperatureSensor:
 
 
 class Sensor:
-    def __init__(self):
+    def __init__(self, args=None):
+        print(args)
+        pass
+
+    def connect(self):
         pass
 
     def read_value(self):
@@ -49,8 +82,11 @@ class Sensor:
 
 
 class DummySensor(Sensor):
-    def __init__(self):
-        Sensor.__init__(self)
+    def __init__(self, args=None):
+        Sensor.__init__(self, args)
+
+    def connect(self):
+        print('Connected')
 
     def read_value(self):
         Sensor.read_value(self)
@@ -58,12 +94,21 @@ class DummySensor(Sensor):
 
 
 class DS18B20(Sensor):
-    def __init__(self):
-        Sensor.__init__(self)
-        os.system('modprobe w1-gpio')
-        os.system('modprobe w1-therm')
+
+    def __init__(self, args=None):
+        Sensor.__init__(self, args)
+        try:#sudo -S
+            os.system('modprobe w1-gpio')
+            os.system('modprobe w1-therm')
+        except PermissionError as pe:
+            print('Could not initialize w1-gpio, w1-therm', pe)
+
+        self.device_file = None
+        self.port_name = args[0]
+
+    def connect(self):
         base_dir = '/sys/bus/w1/devices/'
-        device_folder = glob.glob(base_dir + '28*')[0]
+        device_folder = glob.glob(base_dir + self.port_name)[0] # '28*'
         self.device_file = device_folder + '/w1_slave'
 
     def read_value(self):

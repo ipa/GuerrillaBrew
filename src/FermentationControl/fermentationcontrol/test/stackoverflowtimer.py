@@ -9,7 +9,7 @@ class Borg():
     _shared_state = {}
 
     def __init__(self):
-        self.__dict__ = self._shared_state
+        self.__dict__ = Borg._shared_state
 
 
 class Timers(Borg):
@@ -17,9 +17,10 @@ class Timers(Borg):
     def __init__(self):
         Borg.__init__(self)
 
+    @classmethod
     def update_not_working(self):
         QTimer().singleShot(2000, Timers().update_not_working)
-        print('update')
+        print('update not working')
 
 
 def update_working():
