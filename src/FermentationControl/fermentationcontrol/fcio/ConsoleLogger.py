@@ -10,7 +10,7 @@ class ConsoleLogger:
         self.currentSensorData = {'Name': None, 'Time': datetime.now(), 'Temperature': 0}
 
     def writeToConsole(self):
-        print(self.currentSensorData, 'foo')
+        print(self.currentSensorData)
 
     class TemperatureObserver(Observer):
         def __init__(self, outer):

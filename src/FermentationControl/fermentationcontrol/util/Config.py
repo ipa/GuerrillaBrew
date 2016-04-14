@@ -7,7 +7,7 @@ if sys.version < '3':
     import ConfigParser as configparser
 else:
     import configparser
-    
+
 
 class Config(Borg):
 
@@ -15,7 +15,7 @@ class Config(Borg):
         Borg.__init__(self)
         self.config = configparser.ConfigParser()
         self.config.read('config.ini')
-        self.use_config = 'DEVELOP'#self.config['DEFAULT']['UseConfig']
+        self.use_config = self.config.get('DEFAULT', 'UseConfig')
 
     def get_sensors(self):
         sensors = ast.literal_eval(self.config.get(self.use_config, 'Sensors'))
