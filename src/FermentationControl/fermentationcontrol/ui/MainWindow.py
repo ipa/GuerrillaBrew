@@ -20,23 +20,29 @@ class MainWindow(QMainWindow):
         uic.loadUi('ui/mainwindow.ui', self)
         self.show()
         # self.showFullScreen()
-        self.initSignals()
+        self._init_signals()
         self.temperatureObserver = MainWindow.TemperatureObserver(self)
         self.current_display_sensor = Config().get_display_sensor()
+        self.toggleButton.setText('Toggle\nSensor\n"{0}"'.format(self.current_display_sensor))
+        self.last_update = None
         self.sensor_names = []
         sensors = Config().get_sensors()
         for sensor_name in sensors:
             self.sensor_names.append(sensor_name)
 
-    def initSignals(self):
+    def _init_signals(self):
         self.closeButton.clicked.connect(self.onClose)
         self.toggleButton.clicked.connect(self.onNextSensor)
 
     def updatelcd(self, lcdvalue):
         disp = '{0:.2f}'.format(lcdvalue)
         self.lcdNumber.display(disp)
+        self.last_update = datetime.now().strftime('%x %X')
+        self.update_info_label()
+
+    def update_info_label(self):
         self.labelLast.setText('Sensor: ' + self.current_display_sensor + '     '
-                               'Last Update: ' + datetime.now().strftime('%x %X'))
+                               'Last Update: ' + self.last_update)
 
     def onClose(self):
         self.close()
@@ -46,6 +52,7 @@ class MainWindow(QMainWindow):
         idx = self.sensor_names.index(self.current_display_sensor)
         new_idx = (idx + 1) % len(self.sensor_names)
         self.current_display_sensor = self.sensor_names[new_idx]
+        self.toggleButton.setText('Toggle\nSensor\n' + self.current_display_sensor)
 
     class TemperatureObserver(Observer):
         def __init__(self, outer):

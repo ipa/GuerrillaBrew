@@ -17,6 +17,7 @@ if __name__ == '__main__':
 
     file_logger = FileLogger('output.log')
     console_logger = ConsoleLogger()
+
     # Start Updates
     for sensor in sensors:
         sensor.tempChangedNotifier.addObserver(file_logger.temperatureObserver)
