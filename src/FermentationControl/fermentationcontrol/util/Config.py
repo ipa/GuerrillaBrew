@@ -1,8 +1,13 @@
 #!/usr/bin/env python
 
-import configparser, ast
+import sys
+import ast
 from util.Borg import Borg
-
+if sys.version < '3':
+    import ConfigParser as configparser
+else:
+    import configparser
+    
 
 class Config(Borg):
 
