@@ -52,7 +52,7 @@ class MainWindow(QMainWindow):
         idx = self.sensor_names.index(self.current_display_sensor)
         new_idx = (idx + 1) % len(self.sensor_names)
         self.current_display_sensor = self.sensor_names[new_idx]
-        self.toggleButton.setText('Toggle\nSensor\n' + self.current_display_sensor)
+        self.toggleButton.setText('Toggle\nSensor\n"{0}"'.format(self.current_display_sensor))
 
     class TemperatureObserver(Observer):
         def __init__(self, outer):

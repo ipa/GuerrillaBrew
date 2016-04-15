@@ -15,13 +15,13 @@ if __name__ == '__main__':
     sensors_config = Config().get_sensors()
     sensors = TemperatureSensor.create_sensors_from_list(sensors_config)
 
-    file_logger = FileLogger('output.log')
+    file_logger = FileLogger(Config().get_output_file())
     console_logger = ConsoleLogger()
 
     # Start Updates
     for sensor in sensors:
         sensor.tempChangedNotifier.addObserver(file_logger.temperatureObserver)
-        sensor.tempChangedNotifier.addObserver(console_logger.temperatureObserver)
+        # sensor.tempChangedNotifier.addObserver(console_logger.temperatureObserver)
         sensor.update()
 
     # Start GUI

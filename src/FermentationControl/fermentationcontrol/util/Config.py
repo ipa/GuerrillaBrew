@@ -26,3 +26,6 @@ class Config(Borg):
 
     def get_display_sensor(self):
         return self.config.get(self.use_config, 'DisplaySensor')
+
+    def get_output_file(self):
+        return self.config.get(self.use_config, 'OutputFile')
